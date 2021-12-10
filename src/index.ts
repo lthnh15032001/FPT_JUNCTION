@@ -36,6 +36,10 @@ app.get('/', function (req: Request, res: Response) {
     const url = "http://localhost:3000/"
     res.render(path.join(__dirname, './views/dashboard.ejs'), { URL: url });
 })
+app.get('/users', function (req: Request, res: Response) {
+    const url = "http://localhost:3000/"
+    res.render(path.join(__dirname, './views/users.ejs'), { URL: url });
+})
 app.get('/ping', async (req: Request, res: Response) => {
     try {
         const providers = await axios.get('https://api.vantage.sh/v1/ping', {

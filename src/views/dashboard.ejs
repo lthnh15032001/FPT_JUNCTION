@@ -169,52 +169,23 @@
 
 
         <div class="side-content-wrap">
-            <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+            <div class="sidebar-left open rtl-ps-none" >
                 <ul class="navigation-left">
-                    <li class="nav-item active" data-item="dashboard">
-                        <a class="nav-item-hold" href="#">
+                    <li class="nav-item active" onclick="window.location.href=`/` ">
+                        <div class="nav-item-hold">
                             <i class="nav-icon i-Bar-Chart"></i>
                             <span class="nav-text">Dashboard</span>
-                        </a>
+                        </div>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item " data-item="uikits">
-                        <a class="nav-item-hold" href="#">
+                    <li class="nav-item " >
+                        <a class="nav-item-hold" href="/users">
                             <i class="nav-icon i-Library"></i>
                             <span class="nav-text">Users</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item " data-item="extrakits">
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-Suitcase"></i>
-                            <span class="nav-text">Extra kits</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item " data-item="apps">
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-Computer-Secure"></i>
-                            <span class="nav-text">Apps</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item " data-item="forms">
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-File-Clipboard-File--Text"></i>
-                            <span class="nav-text">Forms</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-
-                    <li class="nav-item " data-item="widgets">
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-Windows-2"></i>
-                            <span class="nav-text">widgets</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-
+              
                     <li class="nav-item " data-item="charts">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-File-Clipboard-File--Text"></i>
@@ -223,34 +194,6 @@
                         <div class="triangle"></div>
                     </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-item-hold" href="../datatables/basic-tables.html">
-                            <i class="nav-icon i-File-Horizontal-Text"></i>
-                            <span class="nav-text">Datatables</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item " data-item="sessions">
-                        <a class="nav-item-hold" href="../test.html">
-                            <i class="nav-icon i-Administrator"></i>
-                            <span class="nav-text">Sessions</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item " data-item="others">
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-Double-Tap"></i>
-                            <span class="nav-text">Pages</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item-hold" href="http://demos.ui-lib.com/gull-html-doc/" target="_blank">
-                            <i class="nav-icon i-Safe-Box1"></i>
-                            <span class="nav-text">Doc</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -264,6 +207,50 @@
                 </div>
 
                 <div class="separator-breadcrumb border-top"></div>
+                <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card  mb-3">
+                                    <div class="card-body">
+                                        <ul class="media-list" id="media-list-4">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card  mb-3">
+                                    <div class="card-body">
+                                        <ul class="media-list" id="media-list-3">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel2" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -325,6 +312,17 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-toggle="modal" data-target="#exampleModal3">
+                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
+                            <div class="card-body text-center">
+                                <i class="i-Money-2"></i>
+                                <div class="content">
+                                    <p class="text-muted mt-2 mb-0">Total Costs</p>
+                                    <p class="text-primary text-24 line-height-1 mb-2" id="costtotal">NaN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-3 col-md-6 col-sm-6" data-toggle="modal" data-target="#exampleModal2">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
@@ -341,29 +339,22 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-toggle="modal" data-target="#exampleModal4">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
                                 <i class="i-Checkout-Basket"></i>
                                 <div class="content">
-                                    <p class="text-muted mt-2 mb-0">Orders</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">80</p>
+                                    <div style="width: 110px;">
+                                        <p class="text-muted mt-2 mb-0">
+                                            Active Regions
+                                        </p>
+                                    </div>
+                                    <p class="text-primary text-24 line-height-1 mb-2 ml-2" id="region">NaN</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
-                            <div class="card-body text-center">
-                                <i class="i-Money-2"></i>
-                                <div class="content">
-                                    <p class="text-muted mt-2 mb-0">Expense</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">$1200</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
 
