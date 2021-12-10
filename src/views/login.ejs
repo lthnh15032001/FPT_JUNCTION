@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" />
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    #container {
+        height: 100vh;
+        /* Use vh as a fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100);
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    p {
+        color: #2c2c2c;
+        text-align: center;
+        font-size: 80%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    #bottom-container {
+        align-items: center;
+        display: flex;
+        height: 50%;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div style=" height:100%; overflow: hidden;">
+        <!-- <section style="
+        height: 100%;
+        width: 100%; 
+        position: sticky;
+        top: 0; ">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/rogo-4b5d3.appspot.com/o/logo_small.png?alt=media&token=6fb121cf-f5f2-4191-99c2-b55e4deadb94"
+        alt="logo" width=50% height=auto margin: 0 auto; />
+    </section> -->
+        <!-- <section style="
+          height: 100%;
+          width: 100%; position: sticky;
+          top: 0; ">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/rogo-4b5d3.appspot.com/o/banner_assistant.png?alt=media&token=f6f73a31-f10c-46b6-9f0b-cbf25176fe5a"
+        alt="name" width=100% height=auto />
+    </section> -->
+
+        <section style="
+        height: 100%;
+        width: 100%; position: sticky;
+        top: 0; ">
+            <div id="bottom-container" style="
+          margin-top: 5%;
+          margin-bottom: 15%;
+        ">
+                <div id="firebaseui-auth-container"></div>
+            </div>
+        </section>
+        <section style="
+        height: 100%;
+        width: 100%; position: sticky;
+        top: 0; ">
+            <p>By signing in, you are authorizing Google to access your devices</p>
+        </section>
+        <!-- Repeat other sections -->
+    </div>
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center">
+                    <h5 class="modal-title text-center">Choose your location:</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="my-text"></p>
+                    <div class="row" id="loc">
+
+                    </div>
+                    <!-- <p class="text-secondary"><small>If you don't save, your changes will be lost.</small></p> -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="signout">Sign out</button>
+                    <button class="btn btn-success" id="confirm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.22.0/axios.min.js"
+        integrity="sha512-m2ssMAtdCEYGWXQ8hXVG4Q39uKYtbfaJL5QMTbhl2kc6vYyubrKHhr6aLLXW4ITeXSywQLn1AhsAaqrJl8Acfg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+    <script>
+		const getLoc = async (idToken, userExtra) => {
+			try {
+				const getListLocation = await axios.post('<%= URL %>' + '/getListLocation?key=' + '<%= key %>', {} ,  { headers: { Authorization: 'Bearer ' + idToken } })
+				// console.log({ getListLocation: getListLocation })
+				return getListLocation.data.data
+			} catch (e) {
+				console.error(e)
+				document.getElementById('my-text').textContent = 'Error get locations: ' + error
+			}
+		}
+		const createElement = (content, uuid, check) => {
+			var item = document.createElement("div")
+			item.className = "form-check"
+			var input = document.createElement("input")
+			input.className = "form-check-input"
+			input.type = "radio"
+			input.name = "location"
+			input.id = uuid
+			input.disabled = check
+			var label = document.createElement("label")
+			label.setAttribute("class", "form-check-label")
+			label.setAttribute("for", uuid)
+			label.innerHTML = content
+			item.append(input, label)
+			return item
+		}
+		const redirect = (authCode) => {
+			console.log({ authCode: authCode })
+			const urlParams = new URLSearchParams(
+				window.location.search
+			)
+			// State sent by Alexa which we have to return.
+			const state = urlParams.get('state')
+			// Redirect uri sent by Alexa.
+			const redirect_uri = urlParams.get('redirect_uri')
+			const google_client_id = urlParams.get('client_id')
+
+			let url = redirect_uri + '?code=' + authCode
+
+			if (state) {
+				url += '&state=' + state
+			}
+			console.log({ url: url })
+			// Redirect
+			window.location.href = url
+		}
+		const getAuth = async (idToken, userExtra) => {
+			try {
+				const getAuthCode = await axios.post('<%= URL %>' + '/auth_code?key=' + '<%= key %>', {} ,  { headers: { Authorization: 'Bearer ' + idToken } })
+				const authCodePure = getAuthCode.data.code
+				const getLocation = await getLoc(idToken, userExtra)
+
+				var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+					keyboard: false,
+					backdrop: 'static',
+				})
+				myModal.show()
+				document.getElementById('my-text').textContent = 'auth_code: ' + authCodePure
+				var loc = document.getElementById('loc')
+				// var item = createElement("All")
+				// loc.append(item)
+
+				// handle user choose all locations
+				if (userExtra.hasOwnProperty('extraInfo') && userExtra['extraInfo'].hasOwnProperty("all")) {
+					if (userExtra['extraInfo']['all']['ga_status'] === 1) {
+						var item = createElement("All", "all", true)
+						loc.append(item)
+					} else {
+						var item = createElement("All", "all", false)
+						loc.append(item)
+					}
+				} else {
+					var item = createElement("All", "all", false)
+					loc.append(item)
+				}
+
+				//// handle user choose specify locations
+				getLocation.map((x, i) => {
+					// console.log({ x: userExtra['extraInfo'] })
+					if (userExtra.hasOwnProperty('extraInfo') && userExtra['extraInfo'].hasOwnProperty(x.uuid)) {
+						if (userExtra['extraInfo'][x.uuid]['ga_status'] === 1) {
+							var item = createElement(x.label, x.uuid, true)
+							loc.append(item)
+						} else {
+							var item = createElement(x.label, x.uuid, false)
+							loc.append(item)
+						}
+					} else {
+						var item = createElement(x.label, x.uuid, false)
+						loc.append(item)
+					}
+				})
+				let btn = document.getElementById('confirm')
+				let btnSignout = document.getElementById('signout')
+				btnSignout.onclick = async () => {
+					await firebase.auth().signOut()
+					window.location.reload()
+
+				}
+				btn.onclick = () => {
+					const checked = document.querySelector('input[name="location"]:checked')
+					let authCode;
+					if (checked) {
+						if (checked.id === 'all') {
+							authCode = "00_" + userExtra.uuid + "_" + authCodePure // all location
+						} else {
+							authCode = "01_" + checked.id + "_" + authCodePure // specify location id
+						}
+						redirect(authCode)
+					} else {
+						document.getElementById('my-text').textContent = '!!!Not check before'
+					}
+				}
+
+
+			} catch (e) {
+				console.error(e)
+				document.getElementById('my-text').textContent = 'Error get auth_code: ' + JSON.stringify(e)
+			}
+		}
+		document.addEventListener('DOMContentLoaded', function () {
+			try {
+				let app = firebase.app()
+				let features = ['auth'].filter(
+					feature => typeof app[feature] === 'function'
+				)
+				firebase.auth().onAuthStateChanged(
+					function (user) {
+						if (user) {
+							firebase
+								.auth()
+								.currentUser.getIdToken()
+								.then(async idToken => {
+									// console.log(getExtraInfo(idToken))
+									// const userExtra = await getExtraInfo(idToken)
+									try {
+										const response = await axios.post('<%= URL %>' + '/extraInfo?key=' + '<%= key %>', {} ,  { headers: { Authorization: 'Bearer ' + idToken } });
+										// console.log(response.data.data)
+										// console.log({ getAuthCode1: response })
+										const userExtra = response.data.data
+										// console.log(userExtra)
+										if (
+											userExtra.hasOwnProperty('extraInfo') &&
+											userExtra['extraInfo'].hasOwnProperty('GA')
+										) {
+											if (userExtra['extraInfo']['GA']['ga_status'] == 2) {
+												try {
+													const updateExtraInfo = await axios.post('<%= URL %>' + '/updateExtraInfo?key=' + '<%= key %>', {} ,  { headers: { Authorization: 'Bearer ' + idToken } })
+													console.log({ updateExtraInfo: updateExtraInfo })
+													window.location.reload()
+													// await firebase.auth().signOut()
+												} catch (err) {
+													console.error(err)
+													document.getElementById('my-text').textContent = 'Error updateExtraInfo: ' + error
+												}
+											} else {
+												getAuth(idToken, userExtra)
+											}
+										} else {
+											getAuth(idToken, userExtra)
+										}
+									} catch (error) {
+										console.error(error);
+										document.getElementById('my-text').textContent = 'Error get extraInfo: ' + error
+									}
+								})
+								.catch(err => {
+									console.error(err)
+									document.getElementById('my-text').textContent = 'Error get idToken: ' + error
+								})
+						} else {
+							// User is signed out, so we show the Firebase UI.
+
+							// FirebaseUI config.
+							var uiConfig = {
+								signInOptions: [
+									// Leave the lines as is for the providers you want to offer your users.
+									{
+										provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID
+									},
+									{
+										provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
+									},
+									{
+										provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+										whitelistedCountries: ['VN', '+84']
+									}
+								],
+								callbacks: {
+									// Turn of FirebaseUI redirect.
+									signInSuccessWithAuthResult: function (
+										authResult,
+										redirectUrl
+									) {
+										return false
+									}
+								},
+								credentialHelper: firebaseui.auth.CredentialHelper.NONE
+							}
+
+							// Initialize the FirebaseUI Widget using Firebase.
+							var ui = new firebaseui.auth.AuthUI(firebase.auth())
+							// The start method will wait until the DOM is loaded.
+							ui.start('#firebaseui-auth-container', uiConfig)
+						}
+					},
+					function (error) {
+						console.log(error)
+						document.getElementById('info').textContent = 'Error: ' + error
+					}
+				)
+			} catch (e) {
+				console.error(e)
+				document.getElementById('load').innerHTML =
+					'Error loading the Firebase SDK, check the console.'
+			}
+		})
+
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</html>
