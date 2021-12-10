@@ -43,7 +43,7 @@ app.get('/ping', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(providers.data)
+       
         res.status(200).json(providers.data)
     } catch (e) {
         res.status(400).json({ e: e })

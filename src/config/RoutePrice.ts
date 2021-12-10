@@ -11,7 +11,7 @@ router.get('/providers', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(providers.data)
+       
         res.status(200).json(providers.data)
     } catch (e) {
         res.status(400).json({ e: e })
@@ -24,7 +24,7 @@ router.get('/services', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(services.data)
+       
         res.status(200).json(services.data)
     } catch (e) {
         res.status(400).json({ e: e })
@@ -37,7 +37,7 @@ router.get('/products', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(products.data)
+       
         res.status(200).json(products.data)
     } catch (e) {
         res.status(400).json({ e: e })
@@ -51,7 +51,7 @@ router.get('/products/:id', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(products.data)
+       
         res.status(200).json(products.data)
     } catch (e) {
         res.status(400).json({ e: e })
@@ -65,7 +65,7 @@ router.get('/products/:id/prices', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(products.data)
+       
         res.status(200).json(products.data)
     } catch (e) {
         res.status(400).json({ e: e })
@@ -80,7 +80,7 @@ router.get('/products/:id/prices/:id2', async (req: Request, res: Response) => {
                 Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
             }
         })
-        console.log(products.data)
+       
         res.status(200).json(products.data)
     } catch (e) {
         res.status(400).json({ e: e })
