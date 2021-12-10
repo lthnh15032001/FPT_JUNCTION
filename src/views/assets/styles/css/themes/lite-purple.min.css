@@ -1,10 +1,4 @@
-@font-face {
-  font-family: iconsmind;
-  src: url(../../../../fonts/iconsminddaa4.eot?1cd6a624d6a7569e37128c287a443e7e);
-  src: url(../../../../fonts/iconsminddaa4.eot?1cd6a624d6a7569e37128c287a443e7e#iefix) format("embedded-opentype"),url(../../../../fonts/iconsmindf715.ttf?a925856d85799acc394635553311887a) format("truetype"),url(../../../../fonts/iconsmind1fcf.woff?5e5b709879b64c720a2c768a516ff0d3) format("woff"),url(../../../../fonts/iconsmind1735.svg?1f8fca36dc60dea28731a385dc3724ae#iconsmind) format("svg");
-  font-weight: 400;
-  font-style: normal;
-}
+
 
 [class*=" i-"],[class^=i-] {
   font-family: iconsmind!important;
