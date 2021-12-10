@@ -23,10 +23,15 @@
             src: url('<%= URL %>static/assets/fonts/iconsminddaa4.eot?1cd6a624d6a7569e37128c287a443e7e');
             src: url('<%= URL %>static/assets/fonts/iconsminddaa4.eot?1cd6a624d6a7569e37128c287a443e7e#iefix') format("embedded-opentype"),
                 url('<%= URL %>static/assets/fonts/iconsmindf715.ttf?a925856d85799acc394635553311887a') format("truetype"),
-                url('<%= URL %>static/assets/fonts/iconsmind1fcf.woff?5e5b709879b64c720a2c768a516ff0d3') format("woff"), 
+                url('<%= URL %>static/assets/fonts/iconsmind1fcf.woff?5e5b709879b64c720a2c768a516ff0d3') format("woff"),
                 url('<%= URL %>static/assets/fonts/iconsmind1735.svg?1f8fca36dc60dea28731a385dc3724ae#iconsmind') format("svg");
             font-weight: 400;
             font-style: normal;
+        }
+
+        .hover:hover {
+            background-color: aquamarine;
+            cursor: pointer
         }
     </style>
 </head>
@@ -36,23 +41,10 @@
 
     <!-- Pre Loader Strat  -->
     <div class='loadscreen' id="preloader">
-
         <div class="loader spinner-bubble spinner-bubble-primary">
-
 
         </div>
     </div>
-    <!-- Pre Loader end  -->
-
-
-
-
-
-
-
-    <!-- ============ Compact Layout start ============= -->
-    <!-- ============Deafult  Large SIdebar Layout start ============= -->
-
 
     <div class="app-admin-wrap layout-sidebar-large clearfix">
         <div class="main-header">
@@ -268,43 +260,89 @@
         <div class="main-content-wrap sidenav-open d-flex flex-column">
             <div class="main-content">
                 <div class="breadcrumb">
-                    <h1>Version 1</h1>
-                    <ul>
-                        <li><a href="#">Dashboard</a></li>
-                        <li>Version 1</li>
-                    </ul>
+                    <h1>Dashboard</h1>
                 </div>
 
                 <div class="separator-breadcrumb border-top"></div>
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card  mb-3">
+                                    <div class="card-body">
+                                        <ul class="media-list" id="media-list-2">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card  mb-3">
+                                    <div class="card-body">
+                                        <ul class="media-list" id="media-list">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <!-- ICON BG -->
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-toggle="modal" data-target="#exampleModal">
+                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
                                 <i class="i-Add-User"></i>
                                 <div class="content">
-                                    <p class="text-muted mt-2 mb-0">New Leads</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">205</p>
+                                    <div style="width: 110px;">
+                                        <p class="text-muted mt-2 mb-0">Accounts AWS</p>
+                                    </div>
+                                    <p class="text-primary text-24 ml-2 line-height-1 mb-2" id="usr">NaN</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-toggle="modal" data-target="#exampleModal2">
+                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
                                 <i class="i-Financial"></i>
                                 <div class="content">
-                                    <p class="text-muted mt-2 mb-0">Sales</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">$4021</p>
+                                    <div style="width: 110px;">
+                                        <p class="text-muted mt-2 mb-0">
+                                            Active Resources
+                                        </p>
+                                    </div>
+                                    <p class="text-primary text-24 line-height-1 mb-2" id="resource">NaN</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
                                 <i class="i-Checkout-Basket"></i>
                                 <div class="content">
@@ -316,7 +354,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+                        <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 hover">
                             <div class="card-body text-center">
                                 <i class="i-Money-2"></i>
                                 <div class="content">
@@ -903,6 +941,9 @@
     <script src="<%= URL %>static/assets/js/script.js"></script>
     <script src="<%= URL %>static/assets/js/sidebar.large.script.js"></script>
     <script src="<%= URL %>static/assets/js/customizer.script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<%= URL %>static/serviceaws.js"></script>
 </body>
 
