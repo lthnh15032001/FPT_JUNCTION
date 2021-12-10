@@ -3,7 +3,9 @@ import { Router, Request, Response, NextFunction } from 'express'
 const app = express();
 import * as path from 'path'
 const router = Router()
-import appRoute from './config/Route'
+import appRoutePrices from './config/RoutePrice'
+import appRouteCost from './config/RouteCost'
+import axios from 'axios';
 
 
 var bodyParser = require('body-parser');
@@ -30,12 +32,28 @@ function logOriginalUrl(req: Request, res: Response, next: NextFunction) {
 }
 const logStuff = [logOriginalUrl]
 app.use('/', logStuff, router);
-
+app.get('/', function (req: Request, res: Response) {
+    const url = "http://localhost:3000/"
+    res.render(path.join(__dirname, './views/dashboard.ejs'), { URL: url });
+})
+app.get('/ping', async (req: Request, res: Response) => {
+    try {
+        const providers = await axios.get('https://api.vantage.sh/v1/ping', {
+            headers: {
+                Authorization: "Bearer EfE0kQM8GaUbhyG7VealM71MiyoGl_Ld41qDhrc3RWA"
+            }
+        })
+        console.log(providers.data)
+        res.status(200).json(providers.data)
+    } catch (e) {
+        res.status(400).json({ e: e })
+    }
+})
 // FPT server
 
 // alexa skills + GA fullfillment + OAUTH2
-app.use('/api/v1', appRoute)
-
+app.use('/prices', appRoutePrices)
+app.use('/costs', appRouteCost)
 app.listen(3000, () => {
     return console.log(`SERVER IS LISTENING ON DEVELOP at port 3000`)
 })
