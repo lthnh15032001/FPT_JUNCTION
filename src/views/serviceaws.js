@@ -30,7 +30,10 @@ const getInfoOrg = async () => {
     }
 
 }
-const getCosts = async () => {
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+}
+const getCosts = async (returnable = false) => {
     try {
         const orgInfoAccount = await axios.get('costs/reports/2361/costs')
         let costtotal = document.getElementById('costtotal')
@@ -42,15 +45,26 @@ const getCosts = async () => {
         });
         let list = document.getElementById('media-list-3')
         let obj = Object.entries(counts)
-        let i = 0
-        obj.forEach(x => {
-            const format = {
-                label: x[0],
-                value: x[1]
-            }
-            list.appendChild(creatCard(format, i, "Accrued Counts"))
-            i++
-        })
+        if (returnable) {
+            let dataReturn = [];
+            obj.map((x, i) => {
+                // let amount_price = 0;
+                const getFilter = costs.filter(y => y.service === x[0])
+                // getFilter.map(z => amount_price += parseFloat(z.amount))
+                dataReturn.push({service: x[0], data: getFilter})
+            })
+            return dataReturn
+        } else {
+            let i = 0
+            obj.forEach(x => {
+                const format = {
+                    label: x[0],
+                    value: x[1]
+                }
+                list.appendChild(creatCard(format, i, "Accrued Counts"))
+                i++
+            })
+        }
     } catch (e) {
         console.log({ e: e })
     }

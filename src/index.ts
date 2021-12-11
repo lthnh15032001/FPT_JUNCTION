@@ -6,7 +6,7 @@ const router = Router()
 import appRoutePrices from './config/RoutePrice'
 import appRouteCost from './config/RouteCost'
 import axios from 'axios';
-
+var AWS = require('aws-sdk')
 
 var bodyParser = require('body-parser');
 app.set('view engine', 'ejs')
@@ -36,9 +36,39 @@ app.get('/', function (req: Request, res: Response) {
     const url = "http://localhost:3000/"
     res.render(path.join(__dirname, './views/dashboard.ejs'), { URL: url });
 })
-app.get('/users', function (req: Request, res: Response) {
-    const url = "http://localhost:3000/"
-    res.render(path.join(__dirname, './views/users.ejs'), { URL: url });
+app.get('/users', async (req: Request, res: Response) => {
+    AWS.config.update({
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-southeast-1:902250b8-da97-4ea2-a4b2-8116ea658fab',
+            RoleArn: 'arn:aws:iam::446084377221:role/ADMIN',
+        }, { region: "ap-southeast-1", })
+    })
+    const org = new AWS.Organizations({ apiVersion: '2016-11-28', region: "us-east-1" });
+    org.listAccounts({}, function (err: any, data: any) {
+        if (err) {
+            res.status(400).json({ e: err })
+        } else {
+            org.describeOrganization({}, function (err2: any, data2: any) {
+                if (err2) {
+                    res.status(400).json({ e2: err2 })
+                } else {
+                    org.listOrganizationalUnitsForParent({ ParentId: 'r-r9va' }, function (err3, data3) {
+                        if (err3) {
+                            res.status(400).json({ err3: err3 })
+                        }
+                        else {
+                            console.log({ data3: data3 })
+                            const url = "http://localhost:3000/"
+                            res.render(path.join(__dirname, './views/users.ejs'), { URL: url, account: data.Accounts, orgData: data2.Organization, ouData: data3.OrganizationalUnits });
+                        }
+                    });
+                }
+            });
+        }
+    });
+})
+app.get('/test', async (req: Request, res: Response) => {
+    
 })
 app.get('/ping', async (req: Request, res: Response) => {
     try {

@@ -169,7 +169,7 @@
 
 
         <div class="side-content-wrap">
-            <div class="sidebar-left open rtl-ps-none" >
+            <div class="sidebar-left open rtl-ps-none">
                 <ul class="navigation-left">
                     <li class="nav-item active" onclick="window.location.href=`/` ">
                         <div class="nav-item-hold">
@@ -178,14 +178,14 @@
                         </div>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item " >
+                    <li class="nav-item ">
                         <a class="nav-item-hold" href="/users">
                             <i class="nav-icon i-Library"></i>
                             <span class="nav-text">Users</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
-              
+
                     <li class="nav-item " data-item="charts">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-File-Clipboard-File--Text"></i>
@@ -306,7 +306,8 @@
                                     <div style="width: 110px;">
                                         <p class="text-muted mt-2 mb-0">Accounts AWS</p>
                                     </div>
-                                    <p class="text-primary text-24 ml-2 line-height-1 mb-2" id="usr">  <span class="spinner-glow spinner-glow-primary mr-5"></span></p>
+                                    <p class="text-primary text-24 ml-2 line-height-1 mb-2" id="usr"> <span
+                                            class="spinner-glow spinner-glow-primary mr-5"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -318,7 +319,8 @@
                                 <i class="i-Money-2"></i>
                                 <div class="content">
                                     <p class="text-muted mt-2 mb-0">Total Costs</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2" id="costtotal">  <span class="spinner-glow spinner-glow-primary mr-5"></span></p>
+                                    <p class="text-primary text-24 line-height-1 mb-2" id="costtotal"> <span
+                                            class="spinner-glow spinner-glow-primary mr-5"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +335,8 @@
                                             Active Resources
                                         </p>
                                     </div>
-                                    <p class="text-primary text-24 line-height-1 mb-2" id="resource">  <span class="spinner-glow spinner-glow-primary mr-5"></span></p>
+                                    <p class="text-primary text-24 line-height-1 mb-2" id="resource"> <span
+                                            class="spinner-glow spinner-glow-primary mr-5"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +352,8 @@
                                             Active Regions
                                         </p>
                                     </div>
-                                    <p class="text-primary text-24 line-height-1 mb-2 ml-2" id="region">  <span class="spinner-glow spinner-glow-primary mr-5"></span></p>
+                                    <p class="text-primary text-24 line-height-1 mb-2 ml-2" id="region"> <span
+                                            class="spinner-glow spinner-glow-primary mr-5"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -362,8 +366,8 @@
                     <div class="col-lg-8 col-md-12">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="card-title">This Year Sales</div>
-                                <div id="echartBar" style="height: 300px;"></div>
+                                <div class="card-title"> Zoomable timeseries chart(Stock Price Movement)</div>
+                                <div id="zoomableLine-chart"></div>
                             </div>
                         </div>
                     </div>
@@ -377,323 +381,8 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card card-chart-bottom o-hidden mb-4">
-                                    <div class="card-body">
-                                        <div class="text-muted">Last Month Sales</div>
-                                        <p class="mb-4 text-primary text-24">$40250</p>
-                                    </div>
-                                    <div id="echart1" style="height: 260px;"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card card-chart-bottom o-hidden mb-4">
-                                    <div class="card-body">
-                                        <div class="text-muted">Last Week Sales</div>
-                                        <p class="mb-4 text-warning text-24">$10250</p>
-                                    </div>
-                                    <div id="echart2" style="height: 260px;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card o-hidden mb-4">
-                                    <div class="card-header d-flex align-items-center border-0">
-                                        <h3 class="w-50 float-left card-title m-0">New Users</h3>
-                                        <div class="dropdown dropleft text-right w-50 float-right">
-                                            <button class="btn bg-gray-100" type="button" id="dropdownMenuButton1"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="nav-icon i-Gear-2"></i>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <a class="dropdown-item" href="#">Add new user</a>
-                                                <a class="dropdown-item" href="#">View All users</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="">
-                                        <div class="table-responsive">
-                                            <table id="user_table" class="table  text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Avatar</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Smith Doe</td>
-                                                        <td>
-
-                                                            <img class="rounded-circle m-0 avatar-sm-table "
-                                                                src="<%= URL %>static/assets/images/faces/1.jpg" alt="">
-
-                                                        </td>
-
-                                                        <td>Smith@gmail.com</td>
-                                                        <td><span class="badge badge-success">Active</span></td>
-                                                        <td>
-                                                            <a href="#" class="text-success mr-2">
-                                                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                            </a>
-                                                            <a href="#" class="text-danger mr-2">
-                                                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Jhon Doe</td>
-                                                        <td>
-
-                                                            <img class="rounded-circle m-0 avatar-sm-table "
-                                                                src="<%= URL %>static/assets/images/faces/1.jpg" alt="">
-
-                                                        </td>
-
-                                                        <td>Jhon@gmail.com</td>
-                                                        <td><span class="badge badge-info">Pending</span></td>
-                                                        <td>
-                                                            <a href="#" class="text-success mr-2">
-                                                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                            </a>
-                                                            <a href="#" class="text-danger mr-2">
-                                                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Alex</td>
-                                                        <td>
-
-                                                            <img class="rounded-circle m-0 avatar-sm-table "
-                                                                src="<%= URL %>static/assets/images/faces/1.jpg" alt="">
-
-                                                        </td>
-
-                                                        <td>Otto@gmail.com</td>
-                                                        <td><span class="badge badge-warning">Not Active</span></td>
-                                                        <td>
-                                                            <a href="#" class="text-success mr-2">
-                                                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                            </a>
-                                                            <a href="#" class="text-danger mr-2">
-                                                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>Mathew Doe</td>
-                                                        <td>
-
-                                                            <img class="rounded-circle m-0 avatar-sm-table "
-                                                                src="<%= URL %>static/assets/images/faces/1.jpg" alt="">
-
-                                                        </td>
-
-                                                        <td>Mathew@gmail.com</td>
-                                                        <td><span class="badge badge-success">Active</span></td>
-                                                        <td>
-                                                            <a href="#" class="text-success mr-2">
-                                                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                            </a>
-                                                            <a href="#" class="text-danger mr-2">
-                                                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-lg-6 col-md-12">
-
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="card-title">Top Selling Products</div>
-                                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"
-                                        src="<%= URL %>static/assets/images/products/headphone-4.jpg" alt="">
-                                    <div class="flex-grow-1">
-                                        <h5 class=""><a href="#">Wireless Headphone E23</a></h5>
-                                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"
-                                        src="<%= URL %>static/assets/images/products/headphone-2.jpg" alt="">
-                                    <div class="flex-grow-1">
-                                        <h5 class=""><a href="#">Wireless Headphone Y902</a></h5>
-                                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                        <p class="text-small text-danger m-0">$550 <del class="text-muted">$600</del>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View
-                                            details</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"
-                                        src="<%= URL %>static/assets/images/products/headphone-3.jpg" alt="">
-                                    <div class="flex-grow-1">
-                                        <h5 class=""><a href="#">Wireless Headphone E09</a></h5>
-                                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                        <p class="text-small text-danger m-0">$250 <del class="text-muted">$300</del>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View
-                                            details</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"
-                                        src="<%= URL %>static/assets/images/products/headphone-4.jpg" alt="">
-                                    <div class="flex-grow-1">
-                                        <h5 class=""><a href="#">Wireless Headphone X89</a></h5>
-                                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View
-                                            details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-4">
-                            <div class="card-body p-0">
-                                <div class="card-title border-bottom d-flex align-items-center m-0 p-3">
-                                    <span>User activity</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="badge badge-pill badge-warning">Updated daily</span>
-                                </div>
-                                <div class="d-flex border-bottom justify-content-between p-3">
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Pages / Visit</span>
-                                        <h5 class="m-0">2065</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">New user</span>
-                                        <h5 class="m-0">465</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Last week</span>
-                                        <h5 class="m-0">23456</h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex border-bottom justify-content-between p-3">
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Pages / Visit</span>
-                                        <h5 class="m-0">1829</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">New user</span>
-                                        <h5 class="m-0">735</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Last week</span>
-                                        <h5 class="m-0">92565</h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between p-3">
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Pages / Visit</span>
-                                        <h5 class="m-0">3165</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">New user</span>
-                                        <h5 class="m-0">165</h5>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="text-small text-muted">Last week</span>
-                                        <h5 class="m-0">32165</h5>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-body p-0">
-                                <h5 class="card-title m-0 p-3">Last 20 Day Leads</h5>
-                                <div id="echart3" style="height: 360px;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
             </div>
-
-            <!-- Footer Start -->
-            <div class="flex-grow-1"></div>
-            <div class="app-footer">
-                <div class="row">
-                    <div class="col-md-9">
-                        <p><strong>Gull - Laravel 6 + Bootstrap 4 admin Dashboard template</strong></p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quis beatae officia saepe
-                            perferendis
-                            voluptatum minima eveniet voluptates dolorum, temporibus nisi maxime nesciunt totam
-                            repudiandae commodi
-                            sequi dolor quibusdam
-                            sunt.
-                        </p>
-                    </div>
-                </div>
-                <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
-                    <a class="btn btn-primary text-white btn-rounded" target="_blank"
-                        href="https://themeforest.net/item/gull-bootstrap-laravel-admin-dashboard-template/23101970?ref=ui-lib"
-                        target="_blank">Buy
-                        Gull HTML</a>
-                    <span class="flex-grow-1"></span>
-                    <div class="d-flex align-items-center">
-                        <img class="logo" src="<%= URL %>static/assets/images/logo.png" alt="">
-                        <div>
-                            <p class="m-0">&copy; 2019 UI-Lib</p>
-                            <p class="m-0">All rights reserved</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- end of row -->
             <!-- fotter end -->
         </div>
         <!-- ============ Body content End ============= -->
@@ -932,10 +621,566 @@
     <script src="<%= URL %>static/assets/js/script.js"></script>
     <script src="<%= URL %>static/assets/js/sidebar.large.script.js"></script>
     <script src="<%= URL %>static/assets/js/customizer.script.js"></script>
+    <script src="<%= URL %>static/assets/js/vendor/apexcharts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
         integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<%= URL %>static/serviceaws.js"></script>
+    <!-- <script src="<%= URL %>static/assets/js/vendor/apexcharts.dataseries.js"></script> -->
+    <!-- <script src="<%= URL %>static/assets/js/es5/apexChart.script.min.js"></script> -->
+    <script>
+        const getCostObj = async () => {
+            const data = await getCosts(true);
+            return data
+        }
+        var dataSeries = [{
+            "date": "2014-01-01",
+            "value": 150000000
+        },
+        {
+            "date": "2014-01-02",
+            "value": 160379978
+        },
+        {
+            "date": "2014-01-03",
+            "value": 170493749
+        },
+        {
+            "date": "2014-01-04",
+            "value": 160785250
+        },
+        {
+            "date": "2014-01-05",
+            "value": 167391904
+        },
+        {
+            "date": "2014-01-06",
+            "value": 161576838
+        },
+        {
+            "date": "2014-01-07",
+            "value": 161413854
+        },
+        {
+            "date": "2014-01-08",
+            "value": 152177211
+        },
+        {
+            "date": "2014-01-09",
+            "value": 140762210
+        },
+        {
+            "date": "2014-01-10",
+            "value": 144381072
+        },
+        {
+            "date": "2014-01-11",
+            "value": 154352310
+        },
+        {
+            "date": "2014-01-12",
+            "value": 165531790
+        },
+        {
+            "date": "2014-01-13",
+            "value": 175748881
+        },
+        {
+            "date": "2014-01-14",
+            "value": 187064037
+        },
+        {
+            "date": "2014-01-15",
+            "value": 197520685
+        },
+        {
+            "date": "2014-01-16",
+            "value": 210176418
+        },
+        {
+            "date": "2014-01-17",
+            "value": 196122924
+        },
+        {
+            "date": "2014-01-18",
+            "value": 207337480
+        },
+        {
+            "date": "2014-01-19",
+            "value": 200258882
+        },
+        {
+            "date": "2014-01-20",
+            "value": 186829538
+        },
+        {
+            "date": "2014-01-21",
+            "value": 192456897
+        },
+        {
+            "date": "2014-01-22",
+            "value": 204299711
+        },
+        {
+            "date": "2014-01-23",
+            "value": 192759017
+        },
+        {
+            "date": "2014-01-24",
+            "value": 203596183
+        },
+        {
+            "date": "2014-01-25",
+            "value": 208107346
+        },
+        {
+            "date": "2014-01-26",
+            "value": 196359852
+        },
+        {
+            "date": "2014-01-27",
+            "value": 192570783
+        },
+        {
+            "date": "2014-01-28",
+            "value": 177967768
+        },
+        {
+            "date": "2014-01-29",
+            "value": 190632803
+        },
+        {
+            "date": "2014-01-30",
+            "value": 203725316
+        },
+        {
+            "date": "2014-01-31",
+            "value": 218226177
+        },
+        {
+            "date": "2014-02-01",
+            "value": 210698669
+        },
+        {
+            "date": "2014-02-02",
+            "value": 217640656
+        },
+        {
+            "date": "2014-02-03",
+            "value": 216142362
+        },
+        {
+            "date": "2014-02-04",
+            "value": 201410971
+        },
+        {
+            "date": "2014-02-05",
+            "value": 196704289
+        },
+        {
+            "date": "2014-02-06",
+            "value": 190436945
+        },
+        {
+            "date": "2014-02-07",
+            "value": 178891686
+        },
+        {
+            "date": "2014-02-08",
+            "value": 171613962
+        },
+        {
+            "date": "2014-02-09",
+            "value": 157579773
+        },
+        {
+            "date": "2014-02-10",
+            "value": 158677098
+        },
+        {
+            "date": "2014-02-11",
+            "value": 147129977
+        },
+        {
+            "date": "2014-02-12",
+            "value": 151561876
+        },
+        {
+            "date": "2014-02-13",
+            "value": 151627421
+        },
+        {
+            "date": "2014-02-14",
+            "value": 143543872
+        },
+        {
+            "date": "2014-02-15",
+            "value": 136581057
+        },
+        {
+            "date": "2014-02-16",
+            "value": 135560715
+        },
+        {
+            "date": "2014-02-17",
+            "value": 122625263
+        },
+        {
+            "date": "2014-02-18",
+            "value": 112091484
+        },
+        {
+            "date": "2014-02-19",
+            "value": 98810329
+        },
+        {
+            "date": "2014-02-20",
+            "value": 99882912
+        },
+        {
+            "date": "2014-02-21",
+            "value": 94943095
+        },
+        {
+            "date": "2014-02-22",
+            "value": 104875743
+        },
+        {
+            "date": "2014-02-23",
+            "value": 116383678
+        },
+        {
+            "date": "2014-02-24",
+            "value": 125028841
+        },
+        {
+            "date": "2014-02-25",
+            "value": 123967310
+        },
+        {
+            "date": "2014-02-26",
+            "value": 133167029
+        },
+        {
+            "date": "2014-02-27",
+            "value": 128577263
+        },
+        {
+            "date": "2014-02-28",
+            "value": 115836969
+        },
+        {
+            "date": "2014-03-01",
+            "value": 119264529
+        },
+        {
+            "date": "2014-03-02",
+            "value": 109363374
+        },
+        {
+            "date": "2014-03-03",
+            "value": 113985628
+        },
+        {
+            "date": "2014-03-04",
+            "value": 114650999
+        },
+        {
+            "date": "2014-03-05",
+            "value": 110866108
+        },
+        {
+            "date": "2014-03-06",
+            "value": 96473454
+        },
+        {
+            "date": "2014-03-07",
+            "value": 104075886
+        },
+        {
+            "date": "2014-03-08",
+            "value": 103568384
+        },
+        {
+            "date": "2014-03-09",
+            "value": 101534883
+        },
+        {
+            "date": "2014-03-10",
+            "value": 115825447
+        },
+        {
+            "date": "2014-03-11",
+            "value": 126133916
+        },
+        {
+            "date": "2014-03-12",
+            "value": 116502109
+        },
+        {
+            "date": "2014-03-13",
+            "value": 130169411
+        },
+        {
+            "date": "2014-03-14",
+            "value": 124296886
+        },
+        {
+            "date": "2014-03-15",
+            "value": 126347399
+        },
+        {
+            "date": "2014-03-16",
+            "value": 131483669
+        },
+        {
+            "date": "2014-03-17",
+            "value": 142811333
+        },
+        {
+            "date": "2014-03-18",
+            "value": 129675396
+        },
+        {
+            "date": "2014-03-19",
+            "value": 115514483
+        },
+        {
+            "date": "2014-03-20",
+            "value": 117630630
+        },
+        {
+            "date": "2014-03-21",
+            "value": 122340239
+        },
+        {
+            "date": "2014-03-22",
+            "value": 132349091
+        },
+        {
+            "date": "2014-03-23",
+            "value": 125613305
+        },
+        {
+            "date": "2014-03-24",
+            "value": 135592466
+        },
+        {
+            "date": "2014-03-25",
+            "value": 123408762
+        },
+        {
+            "date": "2014-03-26",
+            "value": 111991454
+        },
+        {
+            "date": "2014-03-27",
+            "value": 116123955
+        },
+        {
+            "date": "2014-03-28",
+            "value": 112817214
+        },
+        {
+            "date": "2014-03-29",
+            "value": 113029590
+        },
+        {
+            "date": "2014-03-30",
+            "value": 108753398
+        },
+        {
+            "date": "2014-03-31",
+            "value": 99383763
+        },
+        {
+            "date": "2014-04-01",
+            "value": 100151737
+        },
+        {
+            "date": "2014-04-02",
+            "value": 94985209
+        },
+        {
+            "date": "2014-04-03",
+            "value": 82913669
+        },
+        {
+            "date": "2014-04-04",
+            "value": 78748268
+        },
+        {
+            "date": "2014-04-05",
+            "value": 63829135
+        },
+        {
+            "date": "2014-04-06",
+            "value": 78694727
+        },
+        {
+            "date": "2014-04-07",
+            "value": 80868994
+        },
+        {
+            "date": "2014-04-08",
+            "value": 93799013
+        },
+        {
+            "date": "2014-04-09",
+            "value": 99042416
+        },
+        {
+            "date": "2014-04-10",
+            "value": 97298692
+        },
+        {
+            "date": "2014-04-11",
+            "value": 83353499
+        },
+        {
+            "date": "2014-04-12",
+            "value": 71248129
+        },
+        {
+            "date": "2014-04-13",
+            "value": 75253744
+        },
+        {
+            "date": "2014-04-14",
+            "value": 68976648
+        },
+        {
+            "date": "2014-04-15",
+            "value": 71002284
+        },
+        {
+            "date": "2014-04-16",
+            "value": 75052401
+        },
+        {
+            "date": "2014-04-17",
+            "value": 83894030
+        },
+        {
+            "date": "2014-04-18",
+            "value": 90236528
+        },
+        {
+            "date": "2014-04-19",
+            "value": 99739114
+        },
+        {
+            "date": "2014-04-20",
+            "value": 96407136
+        },
+        {
+            "date": "2014-04-21",
+            "value": 108323177
+        },
+        {
+            "date": "2014-04-22",
+            "value": 101578914
+        },
+        {
+            "date": "2014-04-23",
+            "value": 115877608
+        },
+        {
+            "date": "2014-04-24",
+            "value": 112088857
+        },
+        {
+            "date": "2014-04-25",
+            "value": 112071353
+        },
+        {
+            "date": "2014-04-26",
+            "value": 101790062
+        },
+        {
+            "date": "2014-04-27",
+            "value": 115003761
+        },
+        {
+            "date": "2014-04-28",
+            "value": 120457727
+        },
+        {
+            "date": "2014-04-29",
+            "value": 118253926
+        },
+        {
+            "date": "2014-04-30",
+            "value": 117956992
+        }
+        ]
+        $(document).ready(function () {
+            for (var t = 14844186e5, a = [], r = 0; r < 120; r++) {
+                var o = [t += 864e5, dataSeries[r].value];
+                a.push(o)
+            }
+            // console.log({ a: a })
+            e = {
+                chart: {
+                    type: "area",
+                    stacked: !1,
+                    height: 350,
+                    zoom: {
+                        type: "x",
+                        enabled: !0
+                    },
+                    toolbar: {
+                        autoSelected: "zoom"
+                    }
+                },
+                dataLabels: {
+                    enabled: !1
+                },
+                series: [{
+                    name: "Prices",
+                    data: a
+                }],
+                markers: {
+                    size: 0
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        inverseColors: !1,
+                        opacityFrom: .5,
+                        opacityTo: 0,
+                        stops: [0, 90, 100]
+                    }
+                },
+                yaxis: {
+                    min: 0e7,
+                    max: 10e7,
+                    labels: {
+                        formatter: function (e) {
+                            return "$" + (e / 1e6).toFixed(0)
+                        }
+                    },
+                    title: {
+                        text: " "
+                    }
+                },
+                xaxis: {
+                    type: "datetime"
+                },
+                tooltip: {
+                    shared: !1,
+                    y: {
+                        formatter: function (e) {
+                            return (e / 1e6).toFixed(0)
+                        }
+                    }
+                }
+            };
+            new ApexCharts(document.querySelector("#zoomableLine-chart"), e).render();
+        });
+    </script>
+
 </body>
 
 
