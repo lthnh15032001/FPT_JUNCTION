@@ -17,7 +17,15 @@ app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }))
 require('dotenv').config()
 
 export const KEY_FIREBASE_DEFINE = process.env.KEY_FIREBASE_DEFINE?.split(',');
-
+function updateAWS() {
+    const arn = process.env.ROLEARN as string
+    AWS.config.update({
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: process.env.IDENTYTYPOOLID,
+            RoleArn: arn ,
+        }, { region: process.env.REGION, })
+    })
+}
 // server logger
 function logOriginalUrl(req: Request, res: Response, next: NextFunction) {
     console.log('------')
@@ -37,13 +45,8 @@ app.get('/', function (req: Request, res: Response) {
     res.render(path.join(__dirname, './views/dashboard.ejs'), { URL: url });
 })
 app.get('/users', async (req: Request, res: Response) => {
-    AWS.config.update({
-        credentials: new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'ap-southeast-1:902250b8-da97-4ea2-a4b2-8116ea658fab',
-            RoleArn: 'arn:aws:iam::446084377221:role/ADMIN',
-        }, { region: "ap-southeast-1", })
-    })
-    const org = new AWS.Organizations({ apiVersion: '2016-11-28', region: "us-east-1" });
+    updateAWS()
+    const org = new AWS.Organizations({ apiVersion: '2016-11-28', region:  process.env.REGION, });
     org.listAccounts({}, function (err: any, data: any) {
         if (err) {
             res.status(400).json({ e: err })
@@ -57,7 +60,7 @@ app.get('/users', async (req: Request, res: Response) => {
                             res.status(400).json({ err3: err3 })
                         }
                         else {
-                            console.log({ data3: data3 })
+                            console.log({ data3: data3.OrganizationalUnits })
                             const url = "http://localhost:3000/"
                             res.render(path.join(__dirname, './views/users.ejs'), { URL: url, account: data.Accounts, orgData: data2.Organization, ouData: data3.OrganizationalUnits });
                         }
@@ -67,8 +70,18 @@ app.get('/users', async (req: Request, res: Response) => {
         }
     });
 })
-app.get('/test', async (req: Request, res: Response) => {
-    
+app.get('/users/:id', async (req: Request, res: Response) => {
+    updateAWS()
+    const usrId = req.params.id;
+    const budgets = new AWS.Budgets({ apiVersion: '2016-10-20', region:  process.env.REGION, });
+    var params = {
+        AccountId: usrId
+    };
+    budgets.describeBudgetActionsForAccount(params, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data);           // successful response
+    });
+    res.json("test")
 })
 app.get('/ping', async (req: Request, res: Response) => {
     try {

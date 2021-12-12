@@ -204,7 +204,7 @@
     <div class="main-content-wrap sidenav-open d-flex flex-column">
         <div class="main-content">
             <div class="breadcrumb">
-                <h1>Dashboard</h1>
+                <h1>Organization Info</h1>
             </div>
 
             <div class="separator-breadcrumb border-top"></div>
@@ -242,7 +242,7 @@
                                     </thead>
                                     <tbody>
                                         <% account.forEach((x,i)=> { %>
-                                            <tr>
+                                            <tr class="hover" onclick="window.location.href =`/users/<%= x.Id %>`">
                                                 <th scope="row">
                                                     <%= x.Id %>
                                                 </th>
@@ -284,27 +284,33 @@
 
                         <div class="card-body">
                             <h4 class="card-title mb-2">
-                                <strong>Organization ID : </strong><%= orgData.Id %>
+                                <strong>Organization ID : </strong>
+                                <%= orgData.Id %>
                             </h4>
                             <!-- <p>Add .list-group-flush to remove some borders and rounded corners to render list group items edge-to-edge in a parent container
                                 </p> -->
                             <ul class="list-group list-group-flush">
-                               
+
                                 <li class="list-group-item">
-                                    <strong>Master Account Arn : </strong> <%= orgData.MasterAccountArn %>
+                                    <strong>Master Account Arn : </strong>
+                                    <%= orgData.MasterAccountArn %>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Master Account Email : </strong><%= orgData.MasterAccountEmail %>
+                                    <strong>Master Account Email : </strong>
+                                    <%= orgData.MasterAccountEmail %>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Arn : </strong> <%= orgData.Arn %>
+                                    <strong>Arn : </strong>
+                                    <%= orgData.Arn %>
                                 </li>
                                 <li class="list-group-item"><strong>Feature Set : </strong>: <%= orgData.FeatureSet %>
                                 </li>
                                 <% orgData.AvailablePolicyTypes.forEach((x,i)=> { %>
                                     <li class="list-group-item">
-                                        <strong>Available Policy Types : </strong><%= x.Type %> </br>
-                                        <strong>Available Policy Types Status : </strong><%= x.Status %>
+                                        <strong>Available Policy Types : </strong>
+                                        <%= x.Type %> </br>
+                                            <strong>Available Policy Types Status : </strong>
+                                            <%= x.Status %>
                                     </li>
                                     <% } ) %>
                             </ul>
@@ -364,7 +370,29 @@
                     </div> -->
                 </div>
             </div>
+            <div class="breadcrumb">
+                <h1>Project </h1>
+            </div>
+            <div class="row">
+                <% ouData.forEach((x, i)=> { %>
+                    <div class="col-md-3">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body ">
+                                <p class="text-muted mt-2 mb-2"><strong>ID : </strong>
+                                    <%= x.Id %>
+                                </p>
+                                <p class="text-muted mt-2 mb-2"><strong>Name : </strong>
+                                    <%= x.Name %>
+                                </p>
+                                <p class="text-muted m-0"><strong>Arn : </strong>
+                                    <%= x.Arn %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <%}) %>
 
+            </div>
 
         </div>
 
